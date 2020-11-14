@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Horcrux Encrypted Messaging</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <div class="main">
+    <h1>Horcrux Encrypted Messaging</h1>
+    <p>Twitter: <a href="http://twiter.com/jperla">@jperla</a></p>
+    <h2>Summary</h2>
+    <p>The NSA and other intelligence services <a href="https://en.wikipedia.org/wiki/PRISM_(surveillance_program)">dragnet</a> monitor all communications on well-known platforms and can use zero-day vulnerabilities to hack devices. One can assume that any individual messaging app and platform is hacked. However, to hack them all simultaneously is difficult, expensive, or impossible even for intelligence agencies. We propose a design for an easy-to-use system that would allow private messaging to be secret even to the NSA unless it were to cooperate with an enemy state.</p>
+    <h2>Solution</h2>
+    <h3>Keys</h3>
+    <p>The solution has no passwords, encryption keys, and no complicated key management. There is no trust of any complicated public key algorithm, key lengths, or code.</p>
+    <h2>Assumptions</h2>
+    <p>Assume we have access to one encrypted app and platform that high level actors in a nation state expect to be mostly secure from an enemy nation state, as well as one other encrypted app on another platform in this enemy state that high level actors use insofar as it is mostly secure from its enemy.</p>
+    <p><strong>Trust no messaging channel equally.</strong></p>
+    <p>For example, in the US let us use Signal on an iPhone which is domestic to the US and the NSA may have access in some way but China does not. US business leaders operate business on this and the US government has an interest in keeping this secure (<a href="https://www.theguardian.com/technology/2020/jan/21/amazon-boss-jeff-bezoss-phone-hacked-by-saudi-crown-prince" target="_blank">Jeff Bezos uses Whatsapp</a>). China is a rival nation, and we can use WeChat on an Huawei device, domestic to it. Business leaders and government leaders in China perform business on WeChat and they have an interest in keeping that data secure from the NSA.</p>
+    <h2>Horcruxes</h2>
+    <img src="img/Horcrux%20Messaging.png" class="w-100" alt="">
+    <p>We have a 3rd offline device with no network access, we will call the Magic Wand. One writes the message they would like to send on it, which then uses strong entropy to generate a <a href="https://en.wikipedia.org/wiki/One-time_pad">one-time pad</a> which is the only encryption with perfect secrecy. This generates the ciphertext and a one-time pad, both perfectly random, and we call these 2 bit streams horcruxes (XORcruxes?). We will send the ciphertext through Signal and the one-time pad through WeChat. (From a usability standpoint, this can easily be transferred securely from the 3rd offline device using photos or QR codes).</p>
+    <p>The recipient can use their Magic Wand (3rd offline device) to reconstruct the message from the ciphertext received on Signal and the one-time pad received on WeChat.</p>
+    <p>NSA (and anybody else snooping) gets no information about the content of the message from the encrypted ciphertext. China (and anybody else snooping) gets no information about the contents of the message from the one-time pad. <strong>This encryption is perfect secrecy and can never be broken no matter what advances happen in speed of computers or in quantum computing</strong>. The encryption can be broken in the future if the rival states become allies, or otherwise become willing to share data with each other.</p>
+    <h3>Central Service</h3>
+    <p>There is no central service to manage or which is a point of weak security. There is no cost to managing a central service because there is none. This cannot be taken down by governments, it is a simple XOR. There is equal distrust in all communication channels.</p>
+    <h2>More Horcruxes, More Security</h2>
+    <p>The probability, cost, and expense of cracking this encryption can be increased linearly because it is trivial to add more encrypted chat apps from more rival nation states, such as Russia. There is no limit to the number of messaging apps, email services, and endpoints this message can be split into. <strong>An adversary would need to collect every horcrux of a message in order to defeat the encryption </strong>, which could get politically complicated. Each service which is not trivially compromised would add a layer of friction.</p>
+    <img src="img/HorcruxMessaging.png" class="w-100" alt="">
+    <h2 class="grey">Untitled</h2>
+    <table>
+        <thead>
+            <tr>
+                <th class="grey" width="280px">Switzerland</th>
+                <th class="grey">Threema (private corpo...</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Service run by an anonymous individual, paid in bitcoin, with no logs, and messages destroyed after being collected once</td>
+                <td>SecretMessage</td>
+            </tr>
+            <tr>
+                <td>China</td>
+                <td>WeChat</td>
+            </tr>
+            <tr>
+                <td>USA</td>
+                <td>Signal</td>
+            </tr>
+            <tr>
+                <td>USA</td>
+                <td>Whatsapp</td>
+            </tr>
+            <tr>
+                <td>Russia</td>
+                <td>VK</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>Steganography: Hiding the Horcruxes</h2>
+    <p>Random bits of QR codes sent on the messaging apps can be quite obvious. This can easily be hidden from anybody snooping to add an extra layer of protection so that they do not even know that they are horcruxes in plain sight using <a href="https://arxiv.org/abs/1909.01496">neural linguistic steganography</a> or <a href="https://en.wikipedia.org/wiki/Steganography#Digital_messages">image steganography</a>.</p>
+    <h2>0-Day Attacks</h2>
+    <p>The risk from 0-day attacks can be mitigated by using a multitude of apps and OSs and compute devices. Often the 0-days are targeting the most common platforms, so using a lesser used platform increases the attack cost linearly or superlinearly.</p>
+    <p>It is expensive to attack 0-day vulnerabilities and expose their attack methods on apps and platforms, and also they don't want to blow their 0-days on something speculative (if they get one more horcrux they won't know if it will even be the last one or if there are more, meaning it would be of unknown upside).</p>
+    <h2>Magic Wand Security</h2>
+    <p>The magic wand has a simple e-ink screen. A simple keyboard. No network ports, no USB, no Wifi, no Bluetooth, no wireless or wired networking in any way (basically air-gapped). Real physical hw entropy (not pseudorandom).</p>
+    <p>A simple version less secure version of a Magic Wand could just be an old phone with the Magic Wand app in airplane mode.</p>
+    <p>The only way it communicates is visually through a screen and simple camera. All communication in and out is visually-verifiable and auditable by humans.</p>
+    <p>Other possibly less-secure options instead of visual communication is to use audio sound or bluetooth communication between the Magic Wand and the messenger devices.</p>
+    <h2>Usability</h2>
+    <p>Managing multiple channels of communication or devices can be more cumbersome than managing one device. However, it is well known that using only one device and channel is extremely insecure and even the most wealthy and careful have been hacked. Horcruxes describe the only viable way to increase security, with minimal extra effort and technology.</p>
+    <h2 class="grey">Untitled</h2>
+    <table>
+        <thead>
+            <tr>
+                <th class="grey">Aa</th>
+                <th class="grey">Basic Secrecy</th>
+                <th class="grey">Vulnerabilities</th>
+                <th class="grey">Dragnet Security</th>
+                <th class="grey">0-day security</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Traditional</th>
+                <th>yes 😀</th>
+                <th>Many in Whatsapp/Telegram/Signal</th>
+                <th>no mitigation😞</th>
+                <td>no mitigation😞</td>
+            </tr>
+            <tr>
+                <th>Horcruxes</th>
+                <th>yes 😀</th>
+                <th>Must find and hack all horcruxes to be hacked</th>
+                <th>yes, on device, high usability😀</th>
+                <td>yes, multiple devices 😀  (a bit more effort)</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>All on One Device</h3>
+    <p>The Magic Wand can be an app. The horcruxes can all be generated and sent and received on the same one device for usability (at the expense of security). This still leaves the possibility of single 0-day vulnerabilities (which can be mitigated somewhat with steganography), but still gains the security advantage of avoiding the basic dragnet. This also creates an avenue for getting people used to horcrux messaging, which can also be a vector for informing them about how to increase their security further by generating and sharing horcruxes on multiple devices and platforms. We can upsell users into more devices and a physical separate Magic Wand for more security.</p>
+    <h2>Threat Model</h2>
+    <p>Specifically, we assume that one nation-state, for one messaging channel, a nation-state observer:</p>
+    <ul>
+        <li>Can observe ciphertext</li>
+        <li>Has global network MITM (Passive and active)</li>
+        <li>Cannot break e2ee outside of apps it controls; cannot derive messages from merely passively observing ciphertext of apps secured by other nation-states</li>
+        <li>Can compel service providers in their nation to share any data the provider has; but not those of rival nations</li>
+        <li>Can compel providers in their nation to serve malicious code to their users; but not those of rival nations</li>
+    </ul>
+    <p>One set of threats this protects agains is any for which people would use Signal for: encrypted security.  Also consider the threat in case a Messenger is compelled by the its local government to leak keys on the client (say through an app update) or server by warrant, or there is a rogue employee at Messenger company who compromises.</p>
+    <p>Sometimes a high security environment will compile its own version of Signal's open source client, however it will be days or weeks old and have published vulnerabilities.  Horcruxes would allow the high security user to send 1 horcrux on the custom compiled Signal version, and another horcrux on the public app store version (in addition to others), thus increasing the cost significantly of hacking all horcruxes.</p>
+    <p>Another threat is a bug (accidental or intentional) in any single implementation of the app/channel/OS/hardware would be mitigated since it would only reveal one horcrux of the N horcruxes.</p>
+    <p>Horcruxes sent on separate devices/OSs/channels increase costs linearly for 0-day vulnerabilities on apps and OS's.</p>
+    <h2>Vulnerabilities</h2>
+    <p>Here are the major vulnerabilities still possible under Horcrux Messaging</p>
+    <ul>
+        <li>
+            DOS could take down a channel, losing a single horcrux and thus the recipient would be unable to receive the message with the rest. The more services the more DOS possibility.
+            <ul>
+                <li>However, any single communication channel is subject to DOS which would take down your whole communication anyway (which would include all messaging app alternatives you would use not using Horcruxes). Since Horcruxes are channel agnostic, if a service goes down, the sender and recipient merely need to use 2+ different working channels (and can coordinate which ones to use using the remaining working channels). Not possible when only communicating on one channel.  Actually DOS is more of an <strong>advantage</strong> to Horcruxes versus any other single communication system.</li>
+                <li>Because we are using large popular services, it would be difficult to take down a channel. It would be much easier for any smaller service (or easier to take down Signal vs FBMessenger).</li>
+                <li>Samir Secret sharing can be used instead of XOR so that you only need m of n messages (although this would significantly increase the complexity of the encryption so code would be more complicated to audit).</li>
+            </ul>
+        </li>
+        <li>
+            Almost all phones and computers are manufactured in China, leaving a huge vulnerability where China could rootkit every possible device already, leaving no safe platform.
+            <ul>
+                <li>This would incentivize manufacturing at least one device end-to-end in the USA, even if it were cheap and inefficient, for simple messaging.</li>
+            </ul>
+        </li>
+        <li>
+            he NSA (or China, or Russia) may already have full access to every possible messaging app and platform data. This seems unlikely, as every major government with resources would want to be able to conduct some business privately and must have developed and trust some messaging app for security for use by at least government officials, and probably by billionaires of that country as well (<a href="https://www.theguardian.com/technology/2020/jan/21/amazon-boss-jeff-bezoss-phone-hacked-by-saudi-crown-prince">Jeff Bezos uses Whatsapp</a>).
+            <ul>
+                <li>This may be the biggest issue. The governments may already have methods for sharing private information with each other, although these bureaucracies have a cost and slow down monitoring.</li>
+            </ul>
+        </li>
+        <li>Shoulder surfing while you're using the Magic Wand.</li>
+        <li>The governments of USA and China and Russia or others could cooperate on decrypting each others' messages from common enemies. However, this would not work if at least one party wanted to protect the message contents. Examples of parties who could leverage this geopolitical arbitrage would be Edward Snowden, Julian Assange, Hong Kong dissidents, Black Lives Matter organizers, and others. Increasing the number of platforms used would increase the political burden of decrypting the messages.</li>
+        <li>Different messaging apps can store data in cloud servers accessible off-device. Make sure the messengers don't store backups in the cloud, or at least that the governments don't have the same access channels.</li>
+        <li>
+            Governments can collude and make it so that you cannot use their secure messaging app unless you are a citizen. Secure messaging only within countries. Balkanization of secure messaging between countries. Leaving no way to securely speak between nation-states.
+            <ul>
+                <li>Maybe this has already happened? No, WeChat still available in US but for how much longer? Signal still available in China, but for how much longer?</li>
+            </ul>
+        </li><li>
+            Sending horcruxes on multiple channels, while possibly increasing message security, leaks who you are talking to so that multiple nation states know who you're talking to, whereas if you only use Signal then it's probably only the US.
+            <ul>
+                <li>This can be mitigated a bit by only using messaging channels which hide recipients (unlike Signal etc).  Maybe anonymous mail clients or pastebins online (some steganography too).</li>
+            </ul>
+        </li>
+        <li>Operational Security always a risk, and need to have same opsec for both sender and receiver to maintain the same level of security. For example, you can reduce (but not eliminate) security if the receiver is lazy and always have both channel close by for convenience (or reads each horcrux on same device).</li>
+        <li>If you’re such a high profile target that US or Chinese government would go for cracking multiple messengers for you, cybersecurity measures probably won’t save you for too long.</li>
+    </ul>
+    
+    
+   </div>
+</body>
+<script src="script.js"></script>
+</html>

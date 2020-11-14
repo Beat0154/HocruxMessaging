@@ -1,0 +1,63 @@
+body{
+    padding: 0;
+    margin: 0;
+    color: rgb(55, 53, 47);
+    line-height: 1.2;
+    font-family: inter, Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+}
+a{
+    color: rgb(55, 53, 47);
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+.main{
+    width: 50%;
+    margin: auto;
+}
+h1{
+    margin-top: 200px;
+    font-size: 40px;
+}
+h2{
+    margin-top: 1.4em;
+    font-size: 1.5em;
+}
+h3{
+    margin-top: 20px;
+    font-size: 20px;
+}
+p, a{
+    margin: 1rem 0 0;
+    line-height: 1.5;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: inter, Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+}
+a{
+    opacity: 0.7;
+}
+.w-100{
+    width:100%;
+}
+table, table tr td, table tr th{
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    border-collapse: collapse;
+    text-align: left;
+    padding: 0.5rem;
+    border-left: 1px solid lightgrey;
+}
+table tr td:first-child,
+table tr th:first-child{
+    border-left: 1px solid white;
+}
+.grey{
+    color: lightgrey !important;
+    overflow: hidden;
+}
+ul li{
+    line-height: 1.5rem;
+    padding-top: 1rem;
+}
